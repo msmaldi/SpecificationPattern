@@ -1,0 +1,31 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "SpecificationPattern.ConsoleApp Console Application",
+  "authors": [ "msmaldi" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "EntityFramework.Core": "7.0.0-beta8",
+    "EntityFramework.SqlServer": "7.0.0-beta8",
+    "Msmaldi.SpecificationPattern": ""
+  },
+
+  "commands": {
+    "SpecificationPattern.ConsoleApp": "SpecificationPattern.ConsoleApp"
+  },
+
+  "frameworks": {
+    "dnx451": { },
+    "dnxcore50": {
+      "dependencies": {
+        "Microsoft.CSharp": "4.0.1-beta-23409",
+        "System.Collections": "4.0.11-beta-23409",
+        "System.Console": "4.0.0-beta-23409",
+        "System.Linq": "4.0.1-beta-23409",
+        "System.Threading": "4.0.11-beta-23409"
+      }
+    }
+  }
+}
