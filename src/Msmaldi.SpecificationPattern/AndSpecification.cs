@@ -4,22 +4,22 @@
 
   public class AndSpecification<T> : Specification<T>
   {
-    Specification<T> leftSpecification;
-    Specification<T> rightSpecification;
+    private Specification<T> leftSpecification;
+    private Specification<T> rightSpecification;
 
     public AndSpecification(Specification<T> left, Specification<T> right)
     {
       if (left == null || right == null)
         throw new ArgumentNullException();
 
-      this.leftSpecification = left;
-      this.rightSpecification = right;
+      leftSpecification = left;
+      rightSpecification = right;
     }
 
     public override bool IsSatisfiedBy(T o)
     {
-      return this.leftSpecification.IsSatisfiedBy(o)
-          && this.rightSpecification.IsSatisfiedBy(o);
+      return leftSpecification.IsSatisfiedBy(o)
+          && rightSpecification.IsSatisfiedBy(o);
     }
   }
 }

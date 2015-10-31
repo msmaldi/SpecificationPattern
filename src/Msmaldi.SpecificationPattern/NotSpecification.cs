@@ -4,7 +4,7 @@
 
   public class NotSpecification<T> : Specification<T>
   {
-    Specification<T> specification;
+    private Specification<T> specification;
 
     public NotSpecification(Specification<T> specification)
     {
@@ -15,7 +15,7 @@
 
     public override bool IsSatisfiedBy(T arg)
     {
-      return !this.specification.IsSatisfiedBy(arg);
+      return !specification.IsSatisfiedBy(arg);
     }
   }
 }

@@ -1,4 +1,4 @@
-﻿namespace SpecificationPattern.ConsoleApp.Entities
+﻿namespace Msmaldi.SpecificationPattern.Test.Entities
 {
   public enum EstadoCivil
   {

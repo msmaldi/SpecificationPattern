@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SpecificationPattern.ConsoleApp.Entities
+﻿namespace Msmaldi.SpecificationPattern.Test.Entities
 {
+  using System;
+
   public class Pessoa
   {
     public int Id { get; set; }

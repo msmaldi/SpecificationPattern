@@ -1,10 +1,15 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "Msmaldi.SpecificationPattern Class Library",
+  "version": "1.1.0-*",
+  "description": "Msmaldi SpecificationPattern",
   "authors": [ "msmaldi" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/msmaldi/SpecificationPattern"
+  },
+
+  "compilationOptions": {
+    "warningsAsErrors": true
+  },
 
   "frameworks": {
     "dnx451": { },

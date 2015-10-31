@@ -6,6 +6,7 @@
   public class ExpressionSpecification<T> : Specification<T>
   {
     private Expression<Func<T, bool>> expression;
+
     public ExpressionSpecification(Expression<Func<T, bool>> expression)
     {
       if (expression == null)
@@ -36,7 +37,7 @@
 
     private ExpressionSpecification<T> And(ExpressionSpecification<T> specification)
     {
-      ParameterExpression tVar = Expression.Parameter(typeof(T), "tVar");
+      var tVar = Expression.Parameter(typeof(T), "tVar");
       var exprAnd = Expression.AndAlso(Expression.Invoke(expression, tVar),
         Expression.Invoke(specification.expression, tVar));
       return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprAnd, tVar));
@@ -44,7 +45,7 @@
 
     private ExpressionSpecification<T> Or(ExpressionSpecification<T> specification)
     {
-      ParameterExpression tVar = Expression.Parameter(typeof(T), "tVar");
+      var tVar = Expression.Parameter(typeof(T), "tVar");
       var exprOr = Expression.OrElse(Expression.Invoke(expression, tVar),
         Expression.Invoke(specification.expression, tVar));
       return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprOr, tVar));
@@ -52,7 +53,7 @@
 
     private ExpressionSpecification<T> Xor(ExpressionSpecification<T> specification)
     {
-      ParameterExpression tVar = Expression.Parameter(typeof(T), "tVar");
+      var tVar = Expression.Parameter(typeof(T), "tVar");
       var exprXor = Expression.ExclusiveOr(Expression.Invoke(expression, tVar),
         Expression.Invoke(specification.expression, tVar));
       return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprXor, tVar));
@@ -60,7 +61,7 @@
 
     private ExpressionSpecification<T> Not()
     {
-      ParameterExpression tVar = Expression.Parameter(typeof(T), "tVar");
+      var tVar = Expression.Parameter(typeof(T), "tVar");
       var exprNot = Expression.Not(Expression.Invoke(expression, tVar));
       return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprNot, tVar));
     }
