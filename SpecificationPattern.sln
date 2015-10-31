@@ -9,6 +9,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Msmaldi.SpecificationPatter
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5485A076-B167-4284-A8C7-05AFCB9D55F0}"
 	ProjectSection(SolutionItems) = preProject
+		build.cmd = build.cmd
 		global.json = global.json
 		readme.md = readme.md
 	EndProjectSection
