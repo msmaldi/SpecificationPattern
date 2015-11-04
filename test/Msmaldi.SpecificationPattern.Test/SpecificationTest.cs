@@ -3,6 +3,8 @@
   using Entities;
   using Specifications;
   using System;
+  using System.Collections.Generic;
+  using System.Linq;
   using Xunit;
 
   public class SpecificationTest
@@ -49,6 +51,18 @@
       var naoEhSolteiro = !ehSolteiroSpec;
       Assert.True(naoEhSolteiro.IsSatisfiedBy(pedro));
       Assert.False(naoEhSolteiro.IsSatisfiedBy(paula));
+    }
+
+    [Fact]
+    public void ListQueryTest()
+    {
+      var pessoas = (new Pessoa[] { matheus, silvia, pedro, paula, angela }).ToList();
+
+      int mulherCount = pessoas.Where(ehMulherSpec).Count();
+      int mulherSolteiraCount = pessoas.Where(ehMulherSpec & ehSolteiroSpec).Count();
+
+      Assert.Equal(3, mulherCount);
+      Assert.Equal(1, mulherSolteiraCount);
     }
 
 
