@@ -37,33 +37,42 @@
 
     private ExpressionSpecification<T> And(ExpressionSpecification<T> specification)
     {
-      var tVar = Expression.Parameter(typeof(T), "tVar");
-      var exprAnd = Expression.AndAlso(Expression.Invoke(expression, tVar),
-        Expression.Invoke(specification.expression, tVar));
-      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprAnd, tVar));
+      var t = Expression.Parameter(typeof(T), "t");
+      var exprAnd = Expression.AndAlso(Expression.Invoke(expression, t),
+        Expression.Invoke(specification.expression, t));
+      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprAnd, t));
     }
 
     private ExpressionSpecification<T> Or(ExpressionSpecification<T> specification)
     {
-      var tVar = Expression.Parameter(typeof(T), "tVar");
-      var exprOr = Expression.OrElse(Expression.Invoke(expression, tVar),
-        Expression.Invoke(specification.expression, tVar));
-      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprOr, tVar));
+      var t = Expression.Parameter(typeof(T), "t");
+      var exprOr = Expression.OrElse(Expression.Invoke(expression, t),
+        Expression.Invoke(specification.expression, t));
+      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprOr, t));
     }
 
     private ExpressionSpecification<T> Xor(ExpressionSpecification<T> specification)
     {
-      var tVar = Expression.Parameter(typeof(T), "tVar");
-      var exprXor = Expression.ExclusiveOr(Expression.Invoke(expression, tVar),
-        Expression.Invoke(specification.expression, tVar));
-      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprXor, tVar));
+      // This implementation doesnt supported in query
+      //var t = Expression.Parameter(typeof(T), "t");
+      //var exprXor = Expression.ExclusiveOr(Expression.Invoke(expression, t),
+      //  Expression.Invoke(specification.expression, t));
+      //return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprXor, t));
+
+      //  A xor B = (not A and B) or (A and not B)
+      var t = Expression.Parameter(typeof(T), "t");
+      var exprNotA = Expression.Not(Expression.Invoke(expression, t));
+      var exprNotB = Expression.Not(Expression.Invoke(specification.expression, t));
+      var exprNotAandB = Expression.AndAlso(exprNotA, Expression.Invoke(specification.expression, t));
+      var exprAandNotB = Expression.AndAlso(Expression.Invoke(expression, t), exprNotB);
+      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(Expression.OrElse(exprNotAandB, exprAandNotB), t));
     }
 
     private ExpressionSpecification<T> Not()
     {
-      var tVar = Expression.Parameter(typeof(T), "tVar");
-      var exprNot = Expression.Not(Expression.Invoke(expression, tVar));
-      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprNot, tVar));
+      var t = Expression.Parameter(typeof(T), "t");
+      var exprNot = Expression.Not(Expression.Invoke(expression, t));
+      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprNot, t));
     }
   }
 }

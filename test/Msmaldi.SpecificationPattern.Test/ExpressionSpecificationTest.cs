@@ -49,9 +49,7 @@
       Assert.True(naoEhSolteiro.IsSatisfiedBy(pedro));
       Assert.False(naoEhSolteiro.IsSatisfiedBy(paula));
     }
-
-
-
+    
     private ExpressionSpecification<Pessoa> ehMulherSpec =
       new ExpressionSpecification<Pessoa>(p => p.Sexo == Sexo.Feminino);
     private ExpressionSpecification<Pessoa> ehSolteiroSpec =

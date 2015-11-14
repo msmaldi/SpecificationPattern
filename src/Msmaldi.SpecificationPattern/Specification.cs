@@ -1,6 +1,7 @@
 ﻿namespace Msmaldi.SpecificationPattern
 {
   using System;
+  using System.Linq.Expressions;
 
   public abstract class Specification<T>
   {
@@ -18,7 +19,9 @@
     public static Specification<T> operator !(Specification<T> specification) =>
       new NotSpecification<T>(specification);
 
-    public static implicit operator Func<T, bool>(Specification<T> specification) =>
-      specification.IsSatisfiedBy;
+    public static implicit operator Expression<Func<T, bool>>(Specification<T> specification)
+    {
+      return (t) => specification.IsSatisfiedBy(t);
+    }
   }
 }
