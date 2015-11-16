@@ -65,7 +65,8 @@
       var exprNotB = Expression.Not(Expression.Invoke(specification.expression, t));
       var exprNotAandB = Expression.AndAlso(exprNotA, Expression.Invoke(specification.expression, t));
       var exprAandNotB = Expression.AndAlso(Expression.Invoke(expression, t), exprNotB);
-      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(Expression.OrElse(exprNotAandB, exprAandNotB), t));
+      var exprAxorB = Expression.OrElse(exprNotAandB, exprAandNotB);
+      return new ExpressionSpecification<T>(Expression.Lambda<Func<T, bool>>(exprAxorB, t));
     }
 
     private ExpressionSpecification<T> Not()
